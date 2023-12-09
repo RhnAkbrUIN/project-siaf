@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Dosen;
 use App\Models\Mahasiswa;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -12,6 +13,7 @@ use Yajra\DataTables\Facades\DataTables;
 
 class AkunPenggunaController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      */
@@ -70,14 +72,14 @@ class AkunPenggunaController extends Controller
      */
     public function store(Request $request)
     {
-        // $data = $request->all();
+        $data = $request->all();
 
-        // $data['code'] = strtoupper(Str::random(10));
-        // $data['password'] = bcrypt($request->password);
+        $data['password'] = bcrypt($request->password);
+        $data['roles'] = 'admin';
 
-        // User::create($data);
+        User::create($data);
 
-        // return redirect()->route('akun-pengguna.index');
+        return redirect()->route('akun-pengguna.index');
     }
 
     /**
@@ -128,16 +130,30 @@ class AkunPenggunaController extends Controller
     public function destroy(string $id)
     {
         $user = User::findOrFail($id);
-        $mahasiswa = Mahasiswa::where('nim', '=', $user->nim)->firstOrFail();
 
-        // Hapus data user
-        $user->delete();
+        // Cek apakah user adalah mahasiswa
+        if ($user->roles == 'mahasiswa') {
+            $mahasiswa = Mahasiswa::where('nim', '=', $user->nim)->firstOrFail();
+            $mahasiswa->delete();
+            $user->delete();
+        }
 
-        // Hapus data mahasiswa
-        $mahasiswa->delete();
+        // Cek apakah user adalah dosen
+        if ($user->roles == 'dosen') {
+            $dosen = Dosen::where('nip', '=', $user->nip)->firstOrFail();
+            $dosen->delete();
+            $user->delete();
+        }
 
+        // Cek apakah user adalah admin
+        if ($user->roles == 'admin') {
+            $user->delete();
+        }       
+
+        // Tampilkan pesan sukses
         Alert::success('Data Berhasil dihapus!');
 
+        // Kembali ke halaman index
         return redirect()->route('akun-pengguna.index');
     }
 }

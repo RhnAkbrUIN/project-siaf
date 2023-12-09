@@ -43,8 +43,8 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Roles</label>
-                                        <select name="roles" class="form-control" required>
-                                            <option value="admin">Admin</option>
+                                        <select name="roles" class="form-control" required disabled>
+                                            <option value="admin" selected>Admin</option>
                                             <option value="dosen">Dosen</option>
                                             <option value="mahasiswa">Mahasiswa</option>
                                         </select>

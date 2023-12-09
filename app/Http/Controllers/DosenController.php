@@ -120,8 +120,19 @@ class DosenController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $nip)
     {
-        //
+        $dosen = Dosen::where('nip', '=', $nip)->firstOrFail();
+
+        // Hapus data mahasiswa terlebih dahulu
+        $dosen->delete();
+
+        // Hapus data user
+        $user = User::where('nip', '=', $dosen->nip)->firstOrFail();
+        $user->delete();
+
+        Alert::success('Data Berhasil dihapus!');
+
+        return redirect()->route('dosen.index');
     }
 }
