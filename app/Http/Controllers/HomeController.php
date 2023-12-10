@@ -49,13 +49,22 @@ class HomeController extends Controller
         $jumlah_matkul = number_format(Matakuliah::count());
         $jumlah_pengguna = number_format(User::count());
 
-        $dataPengguna = User::select('roles', DB::raw('COUNT(*) as jumlah_user'))
-            ->groupBy('roles')
-            ->get();
+        $dataMahasiswa = Mahasiswa::select('jk', DB::raw('COUNT(*) as jumlah_mahasiswa'))
+                            ->groupBy('jk')
+                            ->get();
 
-        $queryPengguna = $dataPengguna->mapWithKeys(function ($item){
-                return [$item->roles => $item->jumlah_user];
+        $queryMahasiswa = $dataMahasiswa->mapWithKeys(function ($item){
+                return [$item->jk => $item->jumlah_mahasiswa];
             });
+
+        $dataAngkatan = Mahasiswa::select('angkatan', DB::raw('COUNT(*) as jumlah_mahasiswa'))
+                            ->groupBy('angkatan')
+                            ->get();
+
+        $queryAngkatan = $dataAngkatan->mapWithKeys(function ($item){
+                return [$item->angkatan => $item->jumlah_mahasiswa];
+            });
+
 
         return view('pages.admin.dashboard',compact([
             'jumlah_admin',
@@ -63,7 +72,8 @@ class HomeController extends Controller
             'jumlah_mahasiswa',
             'jumlah_matkul',
             'jumlah_pengguna',
-            'queryPengguna',
+            'queryMahasiswa',
+            'queryAngkatan',
         ]));
     }
 

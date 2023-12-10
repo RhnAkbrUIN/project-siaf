@@ -32,7 +32,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>NIM</label>
-                                        <input type="text" name="nim" class="form-control" placeholder="NIM" required value="{{ $item->nim }}">
+                                        <input type="text" name="nim" class="form-control" placeholder="NIM" required value="{{ $item->nim }}" disabled>
                                     </div>
                                 </div>
                             </div>

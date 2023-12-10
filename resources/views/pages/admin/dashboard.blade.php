@@ -52,10 +52,21 @@
 	<div class="table-data">
 		<div class="order">
 			<div class="head">
-				<h3>Data Pengguna</h3>
+				<h3>Data Mahasiswa</h3>
 			</div>
-			<div class="chart-container">
-				<canvas id="DataPengguna" width="200px" height="75px"></canvas>
+			<div class="row">
+				<div class="col-7">
+					<h5>Data Angkatan</h5>
+					<div class="chart-container">
+						<canvas id="DataAngkatan"></canvas>
+					</div>
+				</div>
+				<div class="col-5">
+					<h5>Data Mahasiswa</h5>
+					<div class="chart-container">
+						<canvas id="DataMahasiswa"></canvas>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -70,39 +81,50 @@
 <script src="https://cdn.jsdelivr.net/gh/emn178/chartjs-plugin-labels/src/chartjs-plugin-labels.js"></script>
 
 <script>
-    var queryPengguna = @json($queryPengguna);
+    var queryMahasiswa = @json($queryMahasiswa);
+    var queryAngkatan = @json($queryAngkatan);
 </script>
 
 <script>
 (function($) {
     $(document).ready(function() {
-        var labels = Object.keys(queryPengguna);
-        var data = Object.values(queryPengguna);
+        var labels = Object.keys(queryMahasiswa);
+        var data = Object.values(queryMahasiswa);
         //console.log(labels);
-        var ctx = document.getElementById("DataPengguna").getContext("2d");
-        BarChartPengguna.ChartData(ctx, 'bar', labels, data);
+        var ctx = document.getElementById("DataMahasiswa").getContext("2d");
+        BarChartMahasiswa.ChartDataAkt(ctx, 'pie', labels, data);
     });
 
-    var BarChartPengguna = {
-        ChartData: function(ctx, type, labels, data) {
+    var BarChartMahasiswa = {
+        ChartDataAkt: function(ctx, type, labels, data) {
             new Chart(ctx, {
                 type: type,
                 data: {
                     labels: labels,
                     datasets: [
                         {
-                            label: "Data Pengguna",
+                            label: "Data Angkatan",
                             data: data,
                             backgroundColor: [
-                                '#FF8080',
-                                '#F9B572',
-                                '#F6FDC3',
-                                '#C8E4B2',
-                                '#FFD966',
-                                '#94AF9F',
-                                '#C8FFD4',
-                            ],
-                            borderWidth: 1,
+								'rgba(255, 99, 132, 0.4)',
+								'rgba(255, 159, 64, 0.4)',
+								'rgba(255, 205, 86, 0.4)',
+								'rgba(75, 192, 192, 0.4)',
+								'rgba(54, 162, 235, 0.4)',
+								'rgba(153, 102, 255, 0.4)',
+								'rgba(201, 203, 207, 0.4)'
+							],
+							borderColor: [
+								'rgb(255, 99, 132)',
+								'rgb(255, 159, 64)',
+								'rgb(255, 205, 86)',
+								'rgb(75, 192, 192)',
+								'rgb(54, 162, 235)',
+								'rgb(153, 102, 255)',
+								'rgb(201, 203, 207)'
+							],
+							borderWidth: 1,
+							hoverOffset: 4
                         },
                     ],
                 },
@@ -114,6 +136,68 @@
                             beginAtZero: true
                         }
                     },
+                    plugins: {
+                        labels: {
+                            render: 'persen',
+                        },
+                    },
+                },
+            });
+        },
+    };
+})(jQuery);
+</script>
+
+<script>
+(function($) {
+    $(document).ready(function() {
+        var labels = Object.keys(queryAngkatan);
+        var data = Object.values(queryAngkatan);
+        //console.log(labels);
+        var ctx = document.getElementById("DataAngkatan").getContext("2d");
+        BarChartMahasiswa.ChartData(ctx, 'bar', labels, data);
+    });
+
+    var BarChartMahasiswa = {
+        ChartData: function(ctx, type, labels, data) {
+            new Chart(ctx, {
+                type: type,
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: "Data Mahasiswa",
+                            data: data,
+							backgroundColor: [
+								'rgba(255, 99, 132, 0.2)',
+								'rgba(255, 159, 64, 0.2)',
+								'rgba(255, 205, 86, 0.2)',
+								'rgba(75, 192, 192, 0.2)',
+								'rgba(54, 162, 235, 0.2)',
+								'rgba(153, 102, 255, 0.2)',
+								'rgba(201, 203, 207, 0.2)'
+								],
+							borderColor: [
+								'rgb(255, 99, 132)',
+								'rgb(255, 159, 64)',
+								'rgb(255, 205, 86)',
+								'rgb(75, 192, 192)',
+								'rgb(54, 162, 235)',
+								'rgb(153, 102, 255)',
+								'rgb(201, 203, 207)'
+							],
+							borderWidth: 1,
+                        },
+                    ],
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+					yAxis: {
+							scales: {
+								beginAtZero: true,
+							}
+						},
                     plugins: {
                         labels: {
                             render: 'value',

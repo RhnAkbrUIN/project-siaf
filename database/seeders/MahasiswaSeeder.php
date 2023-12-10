@@ -55,14 +55,14 @@ class MahasiswaSeeder extends Seeder
         $faker = Faker::create();
 
         $data = [];
-        for ($i = 0; $i <= 100; $i++) {
+        for ($i = 0; $i <= 200; $i++) {
             $data[] = [
                 'nim' => '1121' . $i,
                 'name_mhs' => 'Mahasiswa ke-' . $i,
                 'jk' => $faker->randomElement(['Laki-laki', 'Perempuan']),
-                'kelas' => $faker->randomElement(['A', 'B', 'C', 'D', 'E']),
-                'semester' => $faker->numberBetween(1, 12),
-                'angkatan' => $faker->year(),
+                'kelas' => $faker->randomElement(['A', 'B', 'C', 'D']),
+                'semester' => $faker->numberBetween(1, 8),
+                'angkatan' => $faker->randomElement(['2020', '2021', '2022', '2023']),
             ];
         }
 
