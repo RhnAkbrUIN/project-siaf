@@ -9,14 +9,16 @@ class Dosen extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'nip';
-
     protected $table = 'dosen';
 
         protected $fillable = [
         'nip',
         'name_dosen',
         'jk',
-        'code_matkul',
+        'kode_matkul',
         ];
+    
+        public function matakuliah_dosen(){
+            return $this->belongsTo(Matakuliah::class, 'kode_matkul', 'kode_matkul');
+        }
 }

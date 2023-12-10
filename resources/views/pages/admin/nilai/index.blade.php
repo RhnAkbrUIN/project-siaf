@@ -5,7 +5,7 @@
 <main>
 	<div class="head-title">
 		<div class="left">
-			<h1>Dashboard Admin - Dosen</h1>
+			<h1>Dashboard Admin - Input Nilai</h1>
 		</div>
 	</div>
 
@@ -13,17 +13,20 @@
 		<div class="col-md-12 mt-2">
 			<div class="card">
 				<div class="card-body mt-2">
-					<a href="{{ route('dosen.create') }}" class="btn btn-primary mb-3">
-						+ Tambah Dosen Baru
+					<a href="{{ route('nilai.create') }}" class="btn btn-primary mb-3">
+						+ Input Nilai
 					</a>
 					<div class="table-responsive mt-2">
 						<table class="table table-hover scroll-horizontal-vertical w-100" id="crudTable">
 							<thead>
 								<tr>
-									<th>NIP</th>
-									<th>Nama</th>
-									<th>Jenis Kelamin</th>
+									<th>NIM</th>
 									<th>Mata Kuliah</th>
+									<th>Dosen</th>
+									<th>Nilai Tugas</th>
+									<th>Nilai UTS</th>
+									<th>Nilai UAS</th>
+									<th>Total</th>
 									<th>Aksi</th>
 								</tr>
 							</thead>
@@ -49,10 +52,13 @@
                 url: '{!! url()->current() !!}',
             },
             columns: [
-                { data:'nip', name:'nip' },
-                { data:'name_dosen', name:'name_dosen' },
-                { data:'jk', name:'jk' },
-                { data:'matakuliah_dosen.name_matkul', name:'matakuliah_dosen.name_matkul' },
+                { data:'mahasiswa_nilai.nim', name:'mahasiswa_nilai.nim' },
+                { data:'matakuliah_nilai.name_matkul', name:'matakuliah_nilai.name_matkul' },
+                { data:'dosen_nilai.name_dosen', name:'dosen_nilai.name_dosen' },
+                { data:'nilai_tugas', name:'nilai_tugas' },
+                { data:'nilai_uts', name:'nilai_uts' },
+                { data:'nilai_uas', name:'nilai_uas' },
+                { data:'nilai_akhir', name:'nilai_akhir' },
                 { 
                     data:'action', 
                     name:'action',

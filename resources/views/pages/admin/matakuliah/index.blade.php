@@ -48,8 +48,8 @@
                 url: '{!! url()->current() !!}',
             },
             columns: [
-                { data:'code_matkul', name:'code_matkul' },
-                { data:'matkul', name:'matkul' },
+                { data:'kode_matkul', name:'kode_matkul' },
+                { data:'name_matkul', name:'name_matkul' },
                 { data:'sks', name:'sks' },
                 { 
                     data:'action', 

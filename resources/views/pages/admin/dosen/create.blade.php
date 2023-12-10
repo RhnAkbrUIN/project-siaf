@@ -67,10 +67,11 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Matakuliah</label>
-                                        <select class="form-control" name="code_matkul" id="code_matkul" required>
+                                        <select class="form-control" name="kode_matkul" id="code_matkul" required>
                                             <option selected>Choose...</option>
-                                            <option value="540002">540002</option>
-                                            <option value="540004">540004</option>
+                                            @foreach ($matkul as $m)
+                                                <option value="{{ $m->kode_matkul }}">{{ $m->kode_matkul . ' - ' . $m->name_matkul }}</option>
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>

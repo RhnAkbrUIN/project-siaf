@@ -2,9 +2,11 @@
 
 namespace Database\Seeders;
 
+use App\Models\User;
 use App\Models\Dosen;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class DosenSeeder extends Seeder
 {
@@ -13,29 +15,35 @@ class DosenSeeder extends Seeder
      */
     public function run(): void
     {
-        $dosen = [
+        Dosen::insert([
             [
                 'nip' => '20110001001',
                 'name_dosen' => 'Safira Anggia Marwan',
                 'jk' => 'Perempuan',
-                'code_matkul' => 'TI0005',
+                'kode_matkul' => '54001',
             ],
             [
                 'nip' => '20110001002',
                 'name_dosen' => 'Sabrina Erisaputri',
                 'jk' => 'Perempuan',
-                'code_matkul' => 'TI0001',
+                'kode_matkul' => '54002',
             ],
             [
                 'nip' => '20110001003',
                 'name_dosen' => 'Aelissa Maharani',
                 'jk' => 'Perempuan',
-                'code_matkul' => 'TI0002',
+                'kode_matkul' => '54004',
             ],
-        ];
+        ]);
 
-        foreach($dosen as $key => $var){
-            Dosen::create($var);
+        // Seed data for users
+        foreach (Dosen::all() as $dosen) {
+            User::create([
+                'dosen_id' => $dosen->id,
+                'email' => $dosen->nip . '@example.com',
+                'password' => Hash::make('123'),
+                'roles' => 'dosen',
+            ]);
         }
     }
 }

@@ -23,17 +23,17 @@ class MatkulController extends Controller
                         <div class="btn-group">
                             <div class="dropdown">
                                 <button class="btn btn-primary dropdown-toggle mr-1 mb-1" 
-                                    type="button" id="action' .  $item->code_matkul . '"
+                                    type="button" id="action' .  $item->id . '"
                                         data-toggle="dropdown" 
                                         aria-haspopup="true"
                                         aria-expanded="false">
                                         Aksi
                                 </button>
-                                <div class="dropdown-menu" aria-labelledby="action' .  $item->code_matkul . '">
-                                    <a class="dropdown-item" href="' . route('matakuliah.edit', $item->code_matkul) . '">
+                                <div class="dropdown-menu" aria-labelledby="action' .  $item->id . '">
+                                    <a class="dropdown-item" href="' . route('matakuliah.edit', $item->id) . '">
                                         Sunting
                                     </a>
-                                    <form action="' . route('matakuliah.destroy', $item->code_matkul) . '" method="POST">
+                                    <form action="' . route('matakuliah.destroy', $item->id) . '" method="POST">
                                         ' . method_field('delete') . csrf_field() . '
                                         <button type="submit" class="dropdown-item text-danger">
                                             Hapus

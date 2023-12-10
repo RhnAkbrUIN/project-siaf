@@ -55,7 +55,7 @@ class MahasiswaSeeder extends Seeder
         // Seed data for users
         foreach (Mahasiswa::all() as $mahasiswa) {
             User::create([
-                'nim' => $mahasiswa->nim,
+                'mahasiswa_id' => $mahasiswa->id,
                 'email' => $mahasiswa->nim . '@example.com',
                 'password' => Hash::make('123'),
                 'roles' => 'mahasiswa',

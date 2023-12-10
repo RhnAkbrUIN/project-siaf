@@ -31,7 +31,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Kode Mata Kuliah</label>
-                                        <input type="text" name="code_matkul" class="form-control" required>
+                                        <input type="text" name="kode_matkul" class="form-control" required>
                                     </div>
                                 </div>
                             </div>
@@ -39,7 +39,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group">
                                         <label>Nama Mata Kuliah</label>
-                                        <input type="text" name="matkul" class="form-control" required>
+                                        <input type="text" name="name_matkul" class="form-control" required>
                                     </div>
                                 </div>
                             </div>
@@ -54,7 +54,7 @@
                             <div class="row">
                                 <div class="col text-right">
                                     <button class="btn btn-success px-5">
-                                        Save Now
+                                        Submit
                                     </button>
                                 </div>
                             </div>

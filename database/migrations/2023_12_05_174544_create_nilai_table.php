@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('nilai', function (Blueprint $table) {
             $table->id();
-            $table->string('code_matkul');
-            $table->string('nim');
+            $table->integer('kode_matkul');
+            $table->integer('mahasiswa_id');
+            $table->integer('dosen_id');
             $table->integer('nilai_uts');
             $table->integer('nilai_uas');
             $table->integer('nilai_tugas');

@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DosenController;
+use App\Http\Controllers\NilaiController;
 use App\Http\Controllers\MatkulController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\MahasiswaController;
@@ -36,5 +37,6 @@ Route::resource('akun-pengguna', AkunPenggunaController::class);
 Route::resource('matakuliah', MatkulController::class);
 Route::resource('mahasiswa', MahasiswaController::class);
 Route::resource('dosen', DosenController::class);
+Route::resource('nilai', NilaiController::class);
 
 Auth::routes();

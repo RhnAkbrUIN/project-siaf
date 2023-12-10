@@ -25,17 +25,17 @@ class MahasiswaController extends Controller
                         <div class="btn-group">
                             <div class="dropdown">
                                 <button class="btn btn-primary dropdown-toggle mr-1 mb-1" 
-                                    type="button" id="action' .  $item->nim . '"
+                                    type="button" id="action' .  $item->id . '"
                                         data-toggle="dropdown" 
                                         aria-haspopup="true"
                                         aria-expanded="false">
                                         Aksi
                                 </button>
-                                <div class="dropdown-menu" aria-labelledby="action' .  $item->nim . '">
-                                    <a class="dropdown-item" href="' . route('mahasiswa.edit', $item->nim) . '">
+                                <div class="dropdown-menu" aria-labelledby="action' .  $item->id . '">
+                                    <a class="dropdown-item" href="' . route('mahasiswa.edit', $item->id) . '">
                                         Sunting
                                     </a>
-                                    <form action="' . route('mahasiswa.destroy', $item->nim) . '" method="POST">
+                                    <form action="' . route('mahasiswa.destroy', $item->id) . '" method="POST">
                                         ' . method_field('delete') . csrf_field() . '
                                         <button type="submit" class="dropdown-item text-danger">
                                             Hapus
@@ -86,7 +86,7 @@ class MahasiswaController extends Controller
         ]);
 
         User::create([
-            'nim' => $request->nim,
+            'mahasiswa_id' => $request->nim,
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'roles' => 'mahasiswa',
@@ -108,9 +108,9 @@ class MahasiswaController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $nim)
+    public function edit(string $id)
     {
-        $item = Mahasiswa::findOrFail($nim);
+        $item = Mahasiswa::findOrFail($id);
 
         return view('pages.admin.mahasiswa.edit', [
             'item' => $item
@@ -120,13 +120,15 @@ class MahasiswaController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $nim)
+    public function update(Request $request, string $id)
     {
         $data = $request->all();
 
-        $item = Mahasiswa::findOrFail($nim);
+        $item = Mahasiswa::findOrFail($id);
 
         $item->update($data);
+
+        Alert::success('Data Berhasil diubah!');
 
         return redirect()->route('mahasiswa.index');
     }
@@ -134,15 +136,15 @@ class MahasiswaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Request $request, string $nim)
+    public function destroy(string $id)
     {
-        $mahasiswa = Mahasiswa::where('nim', '=', $nim)->firstOrFail();
+        $mahasiswa = Mahasiswa::findOrFail($id);
 
         // Hapus data mahasiswa terlebih dahulu
         $mahasiswa->delete();
 
         // Hapus data user
-        $user = User::where('nim', '=', $mahasiswa->nim)->firstOrFail();
+        $user = User::where('mahasiswa_id', '=', $mahasiswa->id)->firstOrFail();
         $user->delete();
 
         Alert::success('Data Berhasil dihapus!');
