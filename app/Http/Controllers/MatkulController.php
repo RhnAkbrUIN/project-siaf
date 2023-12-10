@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Matakuliah;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
 
 class MatkulController extends Controller
@@ -67,6 +68,8 @@ class MatkulController extends Controller
 
         Matakuliah::create($data);
 
+        Alert::success('Data Berhasil ditambahkan!');
+
         return redirect()->route('matakuliah.index');
     }
 
@@ -83,7 +86,11 @@ class MatkulController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $item = Matakuliah::findOrFail($id);
+
+        return view('pages.admin.matakuliah.edit', [
+            'item' => $item
+        ]);
     }
 
     /**
@@ -91,7 +98,15 @@ class MatkulController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = $request->all();
+
+        $item = Matakuliah::findOrFail($id);
+
+        $item->update($data);
+
+        Alert::success('Data Berhasil diubah!');
+
+        return redirect()->route('matakuliah.index');
     }
 
     /**

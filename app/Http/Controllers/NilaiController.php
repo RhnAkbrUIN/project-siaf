@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dosen;
 use App\Models\Nilai;
+use App\Models\Mahasiswa;
+use App\Models\Matakuliah;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
@@ -58,7 +61,15 @@ class NilaiController extends Controller
      */
     public function create()
     {
-        //
+        $mahasiswa = Mahasiswa::all();
+        $matkul = Matakuliah::all();
+        $dosen = Dosen::all();
+
+        return view('pages.admin.nilai.create', compact([
+            'mahasiswa',
+            'matkul',
+            'dosen',
+        ]));
     }
 
     /**
@@ -66,7 +77,13 @@ class NilaiController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+
+        Nilai::create($data);
+
+        Alert::success('Data Berhasil ditambahkan!');
+
+        return redirect()->route('nilai.index');
     }
 
     /**

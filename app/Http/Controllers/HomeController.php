@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Dosen;
+use App\Models\Mahasiswa;
+use App\Models\Matakuliah;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -37,7 +42,29 @@ class HomeController extends Controller
 
     public function admin()
     {
-        return view('pages.admin.dashboard');
+        $jumlah_admin = number_format(User::where('roles', 'admin')->count());
+        $jumlah_dosen = number_format(Dosen::count());
+        $jumlah_mahasiswa = number_format(Mahasiswa::count());
+        
+        $jumlah_matkul = number_format(Matakuliah::count());
+        $jumlah_pengguna = number_format(User::count());
+
+        $dataPengguna = User::select('roles', DB::raw('COUNT(*) as jumlah_user'))
+            ->groupBy('roles')
+            ->get();
+
+        $queryPengguna = $dataPengguna->mapWithKeys(function ($item){
+                return [$item->roles => $item->jumlah_user];
+            });
+
+        return view('pages.admin.dashboard',compact([
+            'jumlah_admin',
+            'jumlah_dosen',
+            'jumlah_mahasiswa',
+            'jumlah_matkul',
+            'jumlah_pengguna',
+            'queryPengguna',
+        ]));
     }
 
     public function dosen()
