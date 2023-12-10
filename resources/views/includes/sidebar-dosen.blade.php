@@ -5,28 +5,28 @@
 			<span class="text">Website FERR</span>
 		</a>
 		<ul class="side-menu top">
-			<li class="active">
-				<a href="#">
+			<li class="{{ (request()->is('dashboard/dosen*')) ? 'active' : '' }}">
+				<a href="{{ route('dashboard-dosen') }}">
 					<i class='bx bxs-dashboard' ></i>
 					<span class="text">Dashboard</span>
 				</a>
 			</li>
-			<li>
-				<a href="#">
-					<i class='bx bxs-shopping-bag-alt' ></i>
+			<li class="{{ (request()->is('dosen-matakuliah*')) ? 'active' : '' }}">
+				<a href="{{ route('dosen-matakuliah.index') }}">
+					<i class='bx bxs-book'></i>
 					<span class="text">Mata Kuliah</span>
 				</a>
 			</li>
-			<li>
-				<a href="#">
-					<i class='bx bxs-doughnut-chart' ></i>
-					<span class="text">Input Nilai Mahasiswa</span>
+			<li class="{{ (request()->is('dosen-mahasiswa*')) ? 'active' : '' }}">
+				<a href="{{ route('dosen-mahasiswa.index') }}">
+					<i class='bx bxs-group' ></i>
+					<span class="text">Mahasiswa</span>
 				</a>
 			</li>
-			<li>
-				<a href="#">
-					<i class='bx bxs-group' ></i>
-					<span class="text">Team</span>
+			<li class="{{ (request()->is('dosen-nilai*')) ? 'active' : '' }}">
+				<a href="{{ route('dosen-nilai.index') }}">
+					<i class='bx bxs-add-to-queue'></i>
+					<span class="text">Input Nilai Mahasiswa</span>
 				</a>
 			</li>
 		</ul>

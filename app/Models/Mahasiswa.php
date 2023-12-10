@@ -19,7 +19,11 @@ class Mahasiswa extends Model
         'kelas',
         'semester',
         'angkatan',
-        'dosen_nip'
+        'dosen_id'
         ];
+
+    public function dosen(){
+        return $this->belongsTo(Dosen::class, 'dosen_id');
+    }
 
 }

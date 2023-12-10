@@ -79,6 +79,7 @@ class HomeController extends Controller
 
     public function dosen()
     {
+        
         return view('pages.dosen.dashboard');
     }
 

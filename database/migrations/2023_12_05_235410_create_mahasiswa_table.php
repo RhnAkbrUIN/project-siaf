@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('kelas');
             $table->integer('semester');
             $table->integer('angkatan');
+            $table->integer('dosen_id');
             $table->timestamps();
         });
     }

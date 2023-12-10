@@ -16,42 +16,42 @@ class DosenSeeder extends Seeder
      */
     public function run(): void
     {
-        // Dosen::insert([
-        //     [
-        //         'nip' => '20110001001',
-        //         'name_dosen' => 'Safira Anggia Marwan',
-        //         'jk' => 'Perempuan',
-        //         'kode_matkul' => '54001',
-        //     ],
-        //     [
-        //         'nip' => '20110001002',
-        //         'name_dosen' => 'Sabrina Erisaputri',
-        //         'jk' => 'Perempuan',
-        //         'kode_matkul' => '54002',
-        //     ],
-        //     [
-        //         'nip' => '20110001003',
-        //         'name_dosen' => 'Aelissa Maharani',
-        //         'jk' => 'Perempuan',
-        //         'kode_matkul' => '54004',
-        //     ],
-        // ]);
+        Dosen::insert([
+            [
+                'nip' => '20110001001',
+                'name_dosen' => 'Safira Anggia Marwan',
+                'jk' => 'Perempuan',
+                'kode_matkul' => '54001',
+            ],
+            [
+                'nip' => '20110001002',
+                'name_dosen' => 'Sabrina Erisaputri',
+                'jk' => 'Perempuan',
+                'kode_matkul' => '54002',
+            ],
+            [
+                'nip' => '20110001003',
+                'name_dosen' => 'Aelissa Maharani',
+                'jk' => 'Perempuan',
+                'kode_matkul' => '54004',
+            ],
+        ]);
 
-        $faker = Faker::create();
+        // $faker = Faker::create();
 
-        $data = [];
-        for ($i = 0; $i <= 20; $i++) {
-            $data[] = [
-                'nip' => '2011000100' . $i,
-                'name_dosen' => 'Dosen ke-' . $i,
-                'jk' => $faker->randomElement(['Laki-laki', 'Perempuan']),
-                'kode_matkul' => $faker->randomElement(['54001', '54002', '54003', '54004', '54005']),
-            ];
-        }
+        // $data = [];
+        // for ($i = 0; $i <= 20; $i++) {
+        //     $data[] = [
+        //         'nip' => '2011000100' . $i,
+        //         'name_dosen' => 'Dosen ke-' . $i,
+        //         'jk' => $faker->randomElement(['Laki-laki', 'Perempuan']),
+        //         'kode_matkul' => $faker->randomElement(['54001', '54002', '54003', '54004', '54005']),
+        //     ];
+        // }
 
-        foreach ($data as $item) {
-            Dosen::insert($item);
-        }
+        // foreach ($data as $item) {
+        //     Dosen::insert($item);
+        // }
 
         // Seed data for users
         foreach (Dosen::all() as $dosen) {

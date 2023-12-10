@@ -16,8 +16,5 @@ class Matakuliah extends Model
         'name_matkul',
         'sks'
     ];
-
-    public function dosen_matkul(){
-        return $this->hasMany(Dosen::class, 'kode_matkul');
-    }
+    
 }

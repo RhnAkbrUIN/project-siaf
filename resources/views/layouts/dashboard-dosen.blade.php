@@ -50,9 +50,10 @@
     @include('sweetalert::alert')
 
     @stack('prepend-script')
-    <script src="/js/dashboard.js"></script>
+    <script src="/vendor/jquery/jquery.min.js"></script>
+    <script src="/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.datatables.net/v/bs5/dt-1.13.8/datatables.min.js"></script>
-    <script src="/vendor/jquery/jquery.slim.min.js"></script>
+    <script src="/js/dashboard.js"></script>
     @stack('addon-script')
   </body>
 </html>

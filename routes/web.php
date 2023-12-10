@@ -8,7 +8,10 @@ use App\Http\Controllers\NilaiController;
 use App\Http\Controllers\MatkulController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\NilaiDosenController;
+use App\Http\Controllers\MatkulDosenController;
 use App\Http\Controllers\AkunPenggunaController;
+use App\Http\Controllers\MahasiswaDosenController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,12 +34,17 @@ Route::middleware(['auth'])->group(function(){
 
 Route::get('/dashboard', [HomeController::class, 'index'])->name('home');
 
-
+// Route Hak Akses Admin
 Route::get('/dashboard/laporan', [LaporanController::class, 'index'])->name('laporan');
 Route::resource('akun-pengguna', AkunPenggunaController::class);
 Route::resource('matakuliah', MatkulController::class);
 Route::resource('mahasiswa', MahasiswaController::class);
 Route::resource('dosen', DosenController::class);
 Route::resource('nilai', NilaiController::class);
+
+// Route Hak Akses Dosen
+Route::resource('dosen-matakuliah', MatkulDosenController::class);
+Route::resource('dosen-mahasiswa', MahasiswaDosenController::class);
+Route::resource('dosen-nilai', NilaiDosenController::class);
 
 Auth::routes();
