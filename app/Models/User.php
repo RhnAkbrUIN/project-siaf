@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'mahasiswa_id',
         'dosen_id',
+        'name',
         'email',
         'roles',
         'password',

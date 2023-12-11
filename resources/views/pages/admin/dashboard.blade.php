@@ -5,7 +5,7 @@
 <main>
 	<div class="head-title">
 		<div class="left">
-			<h1>Dashboard Admin</h1>
+			<h1>Dashboard Admin - {{ Auth::user()->name }}</h1>
 		</div>
 	</div>
 

@@ -13,7 +13,7 @@ class MahasiswaDosenController extends Controller
      */
     public function index()
     {
-        $dosen = Dosen::with('mahasiswa')->where('id', Auth::user()->dosen_id)->first();
+        $dosen = Dosen::with(['mahasiswa','dosen'])->where('id', Auth::user()->dosen_id)->first();
 
         $mahasiswa = $dosen->mahasiswa;
 
