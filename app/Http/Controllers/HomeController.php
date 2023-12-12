@@ -7,6 +7,8 @@ use App\Models\Dosen;
 use App\Models\Mahasiswa;
 use App\Models\Matakuliah;
 use Illuminate\Http\Request;
+use App\Models\MahasiswaDosen;
+use App\Models\Nilai;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
@@ -79,8 +81,40 @@ class HomeController extends Controller
 
     public function dosen()
     {
+        $jumlah_mahasiswa = MahasiswaDosen::where('dosen_id', Auth::user()->dosen_id)->count();
+        $matkul = Dosen::with('matakuliah_dosen')->where('id', Auth::user()->dosen_id)->first();
+
+        $kode_matkul = $matkul->matakuliah_dosen->where('id', Auth::user()->dosen_id)->first()->name_matkul;
+
+        $dosenId = Auth::user()->dosen_id;
+        $dataKelas = MahasiswaDosen::select('mahasiswa.kelas', DB::raw('COUNT(*) AS jumlah_mahasiswa'))
+            ->join('mahasiswa', 'mahasiswa_dosen.mahasiswa_id', '=', 'mahasiswa.id')
+            ->join('dosen', 'mahasiswa_dosen.dosen_id', '=', 'dosen.id')
+            ->where('dosen.id', $dosenId)
+            ->groupBy('mahasiswa.kelas')
+            ->get();
+
+        $dataJk = MahasiswaDosen::select('mahasiswa.jk', DB::raw('COUNT(*) AS jumlah_mahasiswa'))
+            ->join('mahasiswa', 'mahasiswa_dosen.mahasiswa_id', '=', 'mahasiswa.id')
+            ->join('dosen', 'mahasiswa_dosen.dosen_id', '=', 'dosen.id')
+            ->where('dosen.id', $dosenId)
+            ->groupBy('mahasiswa.jk')
+            ->get();
         
-        return view('pages.dosen.dashboard');
+        $queryKelas = $dataKelas->mapWithKeys(function ($item){
+                return [$item->kelas => $item->jumlah_mahasiswa];
+            });
+
+        $queryJk = $dataJk->mapWithKeys(function ($item){
+                return [$item->jk => $item->jumlah_mahasiswa];
+            });
+            
+        return view('pages.dosen.dashboard', compact([
+        'jumlah_mahasiswa',
+        'kode_matkul',
+        'queryKelas',
+        'queryJk'
+        ]));
     }
 
     public function mahasiswa()

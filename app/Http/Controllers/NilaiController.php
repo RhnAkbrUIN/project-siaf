@@ -79,6 +79,8 @@ class NilaiController extends Controller
     {
         $data = $request->all();
 
+        $data['nilai_akhir'] = ($request->nilai_uts + $request->nilai_uas + $request->nilai_tugas)/3;
+
         Nilai::create($data);
 
         Alert::success('Data Berhasil ditambahkan!');
