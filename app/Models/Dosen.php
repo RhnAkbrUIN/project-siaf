@@ -24,19 +24,11 @@ class Dosen extends Model
 
         public function mahasiswa()
         {
-            return $this->belongsToMany(Mahasiswa::class, 'mahasiswa_dosen', 'dosen_id', 'mahasiswa_id');
+            return $this->belongsToMany(Mahasiswa::class, 'mahasiswa_dosen');
         }
 
         public function dosen()
         {
             return $this->belongsTo(Dosen::class);
-        }
-
-        // public function mahasiswa(){
-        //     return $this->hasMany(Mahasiswa::class);
-        // }
-
-        public function nilai_dosen(){
-            return $this->hasMany(Nilai::class);
         }
 }

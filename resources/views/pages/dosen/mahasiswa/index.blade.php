@@ -6,6 +6,7 @@
 	<div class="head-title">
 		<div class="left">
 			<h1>Dashboard Dosen - Mahasiswa</h1>
+			<h5>Dosen : {{ Auth::user()->name }}</h5>
 		</div>
 	</div>
 
@@ -23,7 +24,6 @@
 									<th>Kelas</th>
 									<th>Semester</th>
 									<th>Angkatan</th>
-									<th>Dosen</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -35,7 +35,6 @@
                                         <td>{{ $mhs->kelas }}</td>
                                         <td>{{ $mhs->semester }}</td>
                                         <td>{{ $mhs->angkatan }}</td>
-                                        <td>{{ $dosen->name_dosen }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>

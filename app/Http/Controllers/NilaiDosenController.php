@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dosen;
 use App\Models\Nilai;
+use App\Models\Mahasiswa;
+use App\Models\Matakuliah;
 use Illuminate\Http\Request;
+use App\Models\MahasiswaDosen;
+use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -15,11 +20,16 @@ class NilaiDosenController extends Controller
     public function index()
     {
         if (request()->ajax()) {
+            $dosenId = Auth::user()->dosen_id;
+
             $query = Nilai::with([
                 'mahasiswa_nilai',
                 'matakuliah_nilai',
                 'dosen_nilai',
-            ]);
+            ])
+                ->whereHas('dosen_nilai', function ($query) use ($dosenId) {
+                    $query->where('dosen_id', $dosenId);
+                });
 
             return Datatables::of($query)
                 ->addColumn('action', function ($item) {
@@ -59,7 +69,10 @@ class NilaiDosenController extends Controller
      */
     public function create()
     {
-        //
+        $dosen = Dosen::with(['mahasiswa','dosen'])->where('id', Auth::user()->dosen_id)->first();
+        $mahasiswa = $dosen->mahasiswa;
+        
+        return view('pages.dosen.nilai.create', compact(['mahasiswa']));
     }
 
     /**
@@ -67,7 +80,27 @@ class NilaiDosenController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // $dosen = Dosen::with(['mahasiswa','dosen'])->where('id', Auth::user()->dosen_id)->first();
+        $mahasiswa = Mahasiswa::where('id', $request->mahasiswa_id)->first();
+
+        $nilai = [
+            'kode_matkul' => Dosen::with(['mahasiswa','dosen'])->where('id', Auth::user()->dosen_id)->first()->kode_matkul,
+            'mahasiswa_id' => $mahasiswa->id,
+            'dosen_id' => Auth::user()->dosen_id,
+            'nilai_uts' => $request->nilai_uts,
+            'nilai_uas' => $request->nilai_uas,
+            'nilai_tugas' => $request->nilai_tugas,
+            'nilai_akhir' => ($request->nilai_uts + $request->nilai_uas + $request->nilai_tugas)/3,
+        ];
+
+        // Simpan nilai
+        Nilai::create($nilai);
+
+        // Buat notifikasi
+        Alert::success('Data Berhasil ditambahkan!');
+
+        // Redirect ke halaman nilai
+        return redirect()->route('dosen-nilai.index');
     }
 
     /**

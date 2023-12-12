@@ -36,4 +36,16 @@ class Nilai extends Model
         public function nilai_mahasiswa(){
             return $this->belongsTo(Dosen::class, 'dosen_id');
         }
+
+        public function mahasiswa(){
+            return $this->belongsTo(Mahasiswa::class);
+        }
+
+        public function dosen(){
+            return $this->belongsTo(Dosen::class);
+        }
+
+        public function matakuliah(){
+            return $this->belongsTo(Matakuliah::class, 'kode_matkul', 'kode_matkul');
+        }
 }

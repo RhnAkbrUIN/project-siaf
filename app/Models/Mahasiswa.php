@@ -21,4 +21,8 @@ class Mahasiswa extends Model
         'angkatan',
         ];
 
+    public function dosen()
+    {
+        return $this->belongsToMany(Dosen::class, 'dosen_mahasiswa');
+    }
 }

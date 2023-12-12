@@ -11,12 +11,12 @@
 					<span class="text">Dashboard</span>
 				</a>
 			</li>
-			<li class="{{ (request()->is('dosen-matakuliah*')) ? 'active' : '' }}">
+			{{-- <li class="{{ (request()->is('dosen-matakuliah*')) ? 'active' : '' }}">
 				<a href="{{ route('dosen-matakuliah.index') }}">
 					<i class='bx bxs-book'></i>
 					<span class="text">Mata Kuliah</span>
 				</a>
-			</li>
+			</li> --}}
 			<li class="{{ (request()->is('dosen-mahasiswa*')) ? 'active' : '' }}">
 				<a href="{{ route('dosen-mahasiswa.index') }}">
 					<i class='bx bxs-group' ></i>

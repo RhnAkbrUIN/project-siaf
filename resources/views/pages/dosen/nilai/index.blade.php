@@ -6,6 +6,7 @@
 	<div class="head-title">
 		<div class="left">
 			<h1>Dashboard Admin - Input Nilai</h1>
+			<h6>Dosen : {{ Auth::user()->name }}</h6>
 		</div>
 	</div>
 
@@ -21,8 +22,6 @@
 							<thead>
 								<tr>
 									<th>NIM</th>
-									<th>Mata Kuliah</th>
-									<th>Dosen</th>
 									<th>Nilai Tugas</th>
 									<th>Nilai UTS</th>
 									<th>Nilai UAS</th>
@@ -53,8 +52,6 @@
             },
             columns: [
                 { data:'mahasiswa_nilai.nim', name:'mahasiswa_nilai.nim' },
-                { data:'matakuliah_nilai.name_matkul', name:'matakuliah_nilai.name_matkul' },
-                { data:'dosen_nilai.name_dosen', name:'dosen_nilai.name_dosen' },
                 { data:'nilai_tugas', name:'nilai_tugas' },
                 { data:'nilai_uts', name:'nilai_uts' },
                 { data:'nilai_uas', name:'nilai_uas' },
