@@ -17,4 +17,7 @@ class Matakuliah extends Model
         'sks'
     ];
     
+    public function mahasiswaDosen(){
+        return $this->hasMany(MahasiswaDosen::class);
+    }
 }

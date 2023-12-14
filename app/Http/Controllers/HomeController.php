@@ -119,6 +119,17 @@ class HomeController extends Controller
 
     public function mahasiswa()
     {
-        return view('pages.mahasiswa.dashboard');
+        $nim_mahasiswa = Mahasiswa::where('id', Auth::user()->mahasiswa_id)->value('nim');
+
+        $result = MahasiswaDosen::select(DB::raw('COUNT(dosen_id) as jumlah_dosen'))
+            ->where('mahasiswa_id', Auth::user()->mahasiswa_id)
+            ->first();
+            
+        $matkul = $result->jumlah_dosen;
+
+        return view('pages.mahasiswa.dashboard', compact([
+            'nim_mahasiswa',
+            'matkul'
+        ]));
     }
 }

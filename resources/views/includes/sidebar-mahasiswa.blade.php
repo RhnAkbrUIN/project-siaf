@@ -5,15 +5,15 @@
 			<span class="text">Website FERR</span>
 		</a>
 		<ul class="side-menu top">
-			<li class="active">
-				<a href="#">
+			<li class="{{ (request()->is('dashboard/mahasiswa*')) ? 'active' : '' }}">
+				<a href="{{ route('dashboard-mahasiswa') }}">
 					<i class='bx bxs-dashboard' ></i>
 					<span class="text">Dashboard</span>
 				</a>
 			</li>
-			<li>
-				<a href="#">
-					<i class='bx bxs-shopping-bag-alt' ></i>
+			<li class="{{ (request()->is('mahasiswa-matakuliah*')) ? 'active' : '' }}">
+				<a href="{{ route('mahasiswa-matakuliah.index') }}">
+					<i class='bx bxs-book'></i>
 					<span class="text">Mata Kuliah</span>
 				</a>
 			</li>
@@ -25,12 +25,6 @@
 			</li>
 		</ul>
 		<ul class="side-menu">
-			<li>
-				<a href="#">
-					<i class='bx bxs-cog' ></i>
-					<span class="text">Settings</span>
-				</a>
-			</li>
 			<li>
 				<a href="#" >
 					

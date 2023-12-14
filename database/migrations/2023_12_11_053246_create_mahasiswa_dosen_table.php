@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('mahasiswa_id');
             $table->integer('dosen_id');
+            $table->integer('matakuliah_id');
             $table->timestamps();
         });
     }

@@ -14,6 +14,7 @@ class MahasiswaDosen extends Model
     protected $fillable = [
         'mahasiswa_id',
         'dosen_id',
+        'matkul_id',
     ];
 
     public function dosen(){
@@ -22,5 +23,9 @@ class MahasiswaDosen extends Model
 
     public function mahasiswa(){
         return $this->belongsTo(Mahasiswa::class);
+    }
+
+    public function matakuliah(){
+        return $this->belongsTo(Matakuliah::class);
     }
 }

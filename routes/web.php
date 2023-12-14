@@ -11,7 +11,9 @@ use App\Http\Controllers\MahasiswaController;
 use App\Http\Controllers\NilaiDosenController;
 use App\Http\Controllers\MatkulDosenController;
 use App\Http\Controllers\AkunPenggunaController;
+use App\Http\Controllers\DosenPengampuController;
 use App\Http\Controllers\MahasiswaDosenController;
+use App\Http\Controllers\MatkulMahasiswaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,10 +43,15 @@ Route::resource('matakuliah', MatkulController::class);
 Route::resource('mahasiswa', MahasiswaController::class);
 Route::resource('dosen', DosenController::class);
 Route::resource('nilai', NilaiController::class);
+Route::resource('pengampu', DosenPengampuController::class);
 
 // Route Hak Akses Dosen
 Route::resource('dosen-matakuliah', MatkulDosenController::class);
 Route::resource('dosen-mahasiswa', MahasiswaDosenController::class);
 Route::resource('dosen-nilai', NilaiDosenController::class);
+
+// Route Hak Akses Mahasiswa
+Route::resource('mahasiswa-matakuliah', MatkulMahasiswaController::class);
+
 
 Auth::routes();

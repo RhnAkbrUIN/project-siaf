@@ -31,4 +31,9 @@ class Dosen extends Model
         {
             return $this->belongsTo(Dosen::class);
         }
+
+        public function matakuliah()
+        {
+            return $this->belongsTo(Matakuliah::class);
+        }
 }

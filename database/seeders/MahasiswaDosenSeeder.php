@@ -35,6 +35,7 @@ class MahasiswaDosenSeeder extends Seeder
                 MahasiswaDosen::create([
                 'mahasiswa_id' => $mahasiswa->id,
                 'dosen_id' => $dosen_id,
+                'matakuliah_id' => $dosen_id,
                 ]);
             }
         }

@@ -29,6 +29,12 @@
 					<span class="text">Mata Kuliah</span>
 				</a>
 			</li>
+			<li class="{{ (request()->is('pengampu*')) ? 'active' : '' }}">
+				<a href="{{ route('pengampu.index') }}">
+					<i class='bx bxs-book'></i>
+					<span class="text">Pengampu Mata Kuliah</span>
+				</a>
+			</li>
 			<li class="{{ (request()->is('nilai*')) ? 'active' : '' }}">
 				<a href="{{ route('nilai.index') }}">
 					<i class='bx bxs-add-to-queue'></i>
@@ -49,12 +55,6 @@
 			</li>
 		</ul>
 		<ul class="side-menu">
-			<li>
-				<a href="#">
-					<i class='bx bxs-cog' ></i>
-					<span class="text">Settings</span>
-				</a>
-			</li>
 			<li>
 				<a href="#" >
 					

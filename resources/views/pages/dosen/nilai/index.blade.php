@@ -42,29 +42,29 @@
 
 @push('addon-script')
     <script>
-    $(document).ready(function() {
-        var datatable = $('#crudTable').DataTable({
-            processing: true,
-            serverSide: true,
-            ordering: true,
-            ajax: {
-                url: '{!! url()->current() !!}',
-            },
-            columns: [
-                { data:'mahasiswa_nilai.nim', name:'mahasiswa_nilai.nim' },
-                { data:'nilai_tugas', name:'nilai_tugas' },
-                { data:'nilai_uts', name:'nilai_uts' },
-                { data:'nilai_uas', name:'nilai_uas' },
-                { data:'nilai_akhir', name:'nilai_akhir' },
-                { 
-                    data:'action', 
-                    name:'action',
-                    orderable: false,
-                    searchable: false,
-                    width: '15%'
-                },
-            ]
-        });
-    });
-</script>
+		$(document).ready(function() {
+			var datatable = $('#crudTable').DataTable({
+				processing: true,
+				serverSide: true,
+				ordering: true,
+				ajax: {
+					url: '{!! url()->current() !!}',
+				},
+				columns: [
+					{ data:'mahasiswa_nilai.nim', name:'mahasiswa_nilai.nim' },
+					{ data:'nilai_tugas', name:'nilai_tugas' },
+					{ data:'nilai_uts', name:'nilai_uts' },
+					{ data:'nilai_uas', name:'nilai_uas' },
+					{ data:'nilai_akhir', name:'nilai_akhir' },
+					{ 
+						data:'action', 
+						name:'action',
+						orderable: false,
+						searchable: false,
+						width: '15%'
+					},
+				]
+			});
+		});
+	</script>
 @endpush
