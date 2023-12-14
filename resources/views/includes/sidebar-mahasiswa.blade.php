@@ -17,6 +17,12 @@
 					<span class="text">Mata Kuliah</span>
 				</a>
 			</li>
+			<li class="{{ (request()->is('mahasiswa-nilai*')) ? 'active' : '' }}">
+				<a href="{{ route('mahasiswa-nilai.index') }}">
+					<i class='bx bxs-add-to-queue'></i>
+					<span class="text">Penilaian</span>
+				</a>
+			</li>
 			<li>
 				<a href="#">
 					<i class='bx bxs-doughnut-chart' ></i>
