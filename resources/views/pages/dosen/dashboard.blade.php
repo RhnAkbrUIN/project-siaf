@@ -28,7 +28,7 @@
 			</li>
 		</ul>
 
-			<div class="table-data">
+		<div class="table-data">
 			<div class="order">
 				<div class="head">
 					<h3>Data Mahasiswa</h3>

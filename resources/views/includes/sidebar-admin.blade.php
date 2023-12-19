@@ -41,12 +41,12 @@
 					<span class="text">Input Nilai</span>
 				</a>
 			</li>
-			<li class="{{ (request()->is('dashboard/laporan*')) ? 'active' : '' }}">
+			{{-- <li class="{{ (request()->is('dashboard/laporan*')) ? 'active' : '' }}">
 				<a href="{{ route('laporan') }}">
 					<i class='bx bxs-doughnut-chart' ></i>
 					<span class="text">Laporan</span>
 				</a>
-			</li>
+			</li> --}}
 			<li class="{{ (request()->is('akun-pengguna*')) ? 'active' : '' }}">
 				<a href="{{ route('akun-pengguna.index') }}">
 					<i class='bx bxs-group' ></i>

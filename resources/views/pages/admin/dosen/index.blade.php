@@ -16,6 +16,10 @@
 					<a href="{{ route('dosen.create') }}" class="btn btn-primary mb-3">
 						+ Tambah Dosen Baru
 					</a>
+					<a href="{{ route('dosen-cetak') }}" target="_blank" class="btn btn-warning mb-3 ml-2">
+						<i class='bx bxs-printer' ></i>
+						Cetak 
+					</a>
 					<div class="table-responsive mt-2">
 						<table class="table table-hover scroll-horizontal-vertical w-100" id="crudTable">
 							<thead>

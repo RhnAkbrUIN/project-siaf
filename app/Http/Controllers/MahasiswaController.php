@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Barryvdh\DomPDF\PDF;
 use App\Models\Mahasiswa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-use Yajra\DataTables\Facades\DataTables;
 use RealRashid\SweetAlert\Facades\Alert;
+use Yajra\DataTables\Facades\DataTables;
 
 class MahasiswaController extends Controller
 {
@@ -150,5 +151,11 @@ class MahasiswaController extends Controller
         Alert::success('Data Berhasil dihapus!');
 
         return redirect()->route('mahasiswa.index');
+    }
+
+    public function cetak(){
+        $mahasiswa = Mahasiswa::all();
+	    return view('pages.admin.mahasiswa.cetak', compact('mahasiswa'));
+
     }
 }

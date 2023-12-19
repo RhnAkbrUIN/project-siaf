@@ -151,4 +151,13 @@ class DosenController extends Controller
 
         return redirect()->route('dosen.index');
     }
+
+    public function cetak(){
+        $dosen = Dosen::with('matakuliah_dosen')->get();
+
+	    return view('pages.admin.dosen.cetak', compact([
+            'dosen',
+        ]));
+
+    }
 }

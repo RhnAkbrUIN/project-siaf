@@ -6,9 +6,6 @@
 		<div class="head-title">
 			<div class="left">
 				<h1>Dashboard Mahasiswa</h1>
-				<h5>Nama : {{ Auth::user()->name }}</h5>
-				<h5>NIM : {{ $nim_mahasiswa }}</h5>
-				<h5>Email : {{ Auth::user()->email }}</h5>
 			</div>
 		</div>
 
@@ -35,6 +32,21 @@
 				</span>
 			</li>
 		</ul>
+
+		<div class="table-data">
+			<div class="order">
+				<div class="head">
+					<h3>Data Diri</h3>
+				</div>
+				<div class="row m-1">
+					<p>Nama : {{ Auth::user()->name }}</p>
+				</div>
+				<div class="row m-1">
+					<p>NIM : {{ $nim_mahasiswa }}</p>
+				</div>
+					<p>Email : {{ Auth::user()->email }}</p>
+			</div>
+		</div>
 	</main>
 	<!-- MAIN -->
 @endsection

@@ -42,7 +42,9 @@ Route::get('/dashboard/laporan', [LaporanController::class, 'index'])->name('lap
 Route::resource('akun-pengguna', AkunPenggunaController::class);
 Route::resource('matakuliah', MatkulController::class);
 Route::resource('mahasiswa', MahasiswaController::class);
+Route::get('mahasiswa-cetak', [MahasiswaController::class, 'cetak'])->name('mahasiswa-cetak');
 Route::resource('dosen', DosenController::class);
+Route::get('dosen-cetak', [DosenController::class, 'cetak'])->name('dosen-cetak');
 Route::resource('nilai', NilaiController::class);
 Route::resource('pengampu', DosenPengampuController::class);
 

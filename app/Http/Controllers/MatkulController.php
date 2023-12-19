@@ -114,6 +114,11 @@ class MatkulController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $item = Matakuliah::findorFail($id);
+        $item->delete();
+
+        Alert::success('Data Berhasil dihapus!');
+
+        return redirect()->route('matakuliah.index');
     }
 }
