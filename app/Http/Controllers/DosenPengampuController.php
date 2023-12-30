@@ -18,10 +18,9 @@ class DosenPengampuController extends Controller
      */
     public function index()
     {
-        
 
         if (request()->ajax()) {
-            $pengampu = MahasiswaDosen::with('mahasiswa','dosen','matakuliah');
+            $pengampu = MahasiswaDosen::with(['mahasiswa','dosen','matakuliah'])->get();
 
             return Datatables::of($pengampu)
                 ->addColumn('action', function ($item) {
@@ -99,7 +98,18 @@ class DosenPengampuController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $mahasiswa = Mahasiswa::all();
+        $matkul = Matakuliah::all();
+        $dosen = Dosen::all();
+        
+        $item = MahasiswaDosen::findOrFail($id);
+
+        return view('pages.admin.pengampu.edit', compact([
+            'mahasiswa',
+            'matkul',
+            'dosen',
+            'item',
+        ]));
     }
 
     /**
@@ -107,7 +117,15 @@ class DosenPengampuController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = $request->all();
+
+        $item = MahasiswaDosen::findOrFail($id);
+
+        $item->update($data);
+
+        Alert::success('Data Berhasil diubah!');
+
+        return redirect()->route('pengampu.index');
     }
 
     /**
@@ -115,18 +133,11 @@ class DosenPengampuController extends Controller
      */
     public function destroy(string $id)
     {
-        // // Ambil data mahasiswa_dosen berdasarkan id
-        // $mahasiswa_dosen = MahasiswaDosen::findOrFail($id);
+        $item = MahasiswaDosen::findorFail($id);
+        $item->delete();
 
-        // // Hapus relasi antara mahasiswa dan mahasiswa_dosen
-        // $mahasiswa_dosen->mahasiswa()->dissociate();
+        Alert::success('Data Berhasil dihapus!');
 
-        // // Hapus data mahasiswa_dosen
-        // $mahasiswa_dosen->delete();
-
-        // Alert::success('Data Berhasil dihapus!');
-
-        // return redirect()->route('pengampu.index');
-
+        return redirect()->route('pengampu.index');
     }
 }

@@ -22,8 +22,7 @@ class NilaiController extends Controller
                 'mahasiswa_nilai',
                 'matakuliah_nilai',
                 'dosen_nilai',
-            ]);
-
+            ])->get();
             return Datatables::of($query)
                 ->addColumn('action', function ($item) {
                     return '
@@ -101,7 +100,17 @@ class NilaiController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $mahasiswa = Mahasiswa::all();
+        $matkul = Matakuliah::all();
+        $dosen = Dosen::all();
+        $item = Nilai::findOrFail($id);
+
+        return view('pages.admin.nilai.edit', compact([
+            'item',
+            'mahasiswa',
+            'matkul',
+            'dosen',
+        ]));
     }
 
     /**
@@ -109,7 +118,15 @@ class NilaiController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = $request->all();
+
+        $item = Nilai::findOrFail($id);
+
+        $item->update($data);
+
+        Alert::success('Data Berhasil diubah!');
+
+        return redirect()->route('nilai.index');
     }
 
     /**
@@ -117,6 +134,19 @@ class NilaiController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $item = Nilai::findorFail($id);
+        $item->delete();
+
+        Alert::success('Data Berhasil dihapus!');
+
+        return redirect()->route('nilai.index');
+    }
+
+    public function cetak(){
+        $nilai = Nilai::with('mahasiswa','dosen','matakuliah_nilai')->get();
+
+	    return view('pages.admin.nilai.cetak', compact([
+            'nilai',
+        ]));
     }
 }

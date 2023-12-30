@@ -12,13 +12,13 @@ class Nilai extends Model
         protected $table = 'nilai';
 
         protected $fillable = [
-        'kode_matkul',
-        'mahasiswa_id',
-        'dosen_id',
-        'nilai_uts',
-        'nilai_uas',
-        'nilai_tugas',
-        'nilai_akhir',
+            'kode_matkul',
+            'mahasiswa_id',
+            'dosen_id',
+            'nilai_uts',
+            'nilai_uas',
+            'nilai_tugas',
+            'nilai_akhir',
         ];
 
         public function mahasiswa_nilai(){

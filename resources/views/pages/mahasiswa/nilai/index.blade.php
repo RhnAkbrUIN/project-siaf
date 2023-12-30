@@ -24,6 +24,7 @@
                                         <th>Tugas</th>
                                         <th>UTS</th>
                                         <th>UAS</th>
+                                        <th>Total</th>
                                         <th>Dosen</th>
                                     </tr>
                                 </thead>
@@ -54,6 +55,7 @@
 					{ data:'nilai_tugas', name:'nilai_tugas' },
 					{ data:'nilai_uts', name:'nilai_uts' },
 					{ data:'nilai_uas', name:'nilai_uas' },
+					{ data:'nilai_akhir', name:'nilai_akhir' },
 					{ data:'dosen.name_dosen', name:'dosen.name_dosen' },
 				]
 			});

@@ -126,10 +126,12 @@ class HomeController extends Controller
             ->first();
             
         $matkul = $result->jumlah_dosen;
+        $dosen = $result->jumlah_dosen;
 
         return view('pages.mahasiswa.dashboard', compact([
             'nim_mahasiswa',
-            'matkul'
+            'matkul',
+            'dosen',
         ]));
     }
 }

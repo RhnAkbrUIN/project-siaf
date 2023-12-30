@@ -38,9 +38,9 @@
         >
           <div class="featured-image mb-4">
             <img
-              src="images/logo_UIN.jpg"
+              src="images/logo_UIN_FERR.gif"
               class="img-fluid"
-              style="width: 350px"
+              style="width: 370px"
             />
           </div>
         </div>
@@ -50,8 +50,7 @@
         <div class="col-md-6 right-box">
           <div class="row align-items-center">
             <div class="header-text mb-4">
-              <h2>Website FERR</h2>
-              <p>UIN Syarif Hidayatullah Jakarta</p>
+              <img src="images/Website_FERR_1.gif" alt="" width="400px" height="155px">
             </div>
             <form method="POST" action="{{ route('login') }}">
                 @csrf

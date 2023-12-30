@@ -26,10 +26,9 @@ class NilaiDosenController extends Controller
                 'mahasiswa_nilai',
                 'matakuliah_nilai',
                 'dosen_nilai',
-            ])
-                ->whereHas('dosen_nilai', function ($query) use ($dosenId) {
+            ])->whereHas('dosen_nilai', function ($query) use ($dosenId) {
                     $query->where('dosen_id', $dosenId);
-                });
+            })->get();
 
             return Datatables::of($query)
                 ->addColumn('action', function ($item) {
@@ -44,10 +43,10 @@ class NilaiDosenController extends Controller
                                         Aksi
                                 </button>
                                 <div class="dropdown-menu" aria-labelledby="action' .  $item->id . '">
-                                    <a class="dropdown-item" href="' . route('mahasiswa.edit', $item->id) . '">
+                                    <a class="dropdown-item" href="' . route('dosen-nilai.edit', $item->id) . '">
                                         Sunting
                                     </a>
-                                    <form action="' . route('mahasiswa.destroy', $item->id) . '" method="POST">
+                                    <form action="' . route('dosen-nilai.destroy', $item->id) . '" method="POST">
                                         ' . method_field('delete') . csrf_field() . '
                                         <button type="submit" class="dropdown-item text-danger">
                                             Hapus
@@ -116,7 +115,17 @@ class NilaiDosenController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $mahasiswa = Mahasiswa::all();
+        $matkul = Matakuliah::all();
+        $dosen = Dosen::all();
+        $item = Nilai::findOrFail($id);
+
+        return view('pages.dosen.nilai.edit', compact([
+            'item',
+            'mahasiswa',
+            'matkul',
+            'dosen',
+        ]));
     }
 
     /**

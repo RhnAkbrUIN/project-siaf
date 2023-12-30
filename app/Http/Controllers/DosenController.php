@@ -18,7 +18,7 @@ class DosenController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            $query = Dosen::with('matakuliah_dosen');
+            $query = Dosen::with('matakuliah_dosen')->get();
 
             return Datatables::of($query)
                 ->addColumn('action', function ($item) {

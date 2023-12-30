@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Dosen;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Yajra\DataTables\Facades\DataTables;
 
 class MahasiswaDosenController extends Controller
 {
@@ -13,11 +14,18 @@ class MahasiswaDosenController extends Controller
      */
     public function index()
     {
-        $dosen = Dosen::with(['mahasiswa','dosen'])->where('id', Auth::user()->dosen_id)->first();
+        // $dosen = Dosen::with(['mahasiswa','dosen'])->where('id', Auth::user()->dosen_id)->first();
 
-        $mahasiswa = $dosen->mahasiswa;
+        // $mahasiswa = $dosen->mahasiswa;
 
-        return view('pages.dosen.mahasiswa.index', compact(['mahasiswa', 'dosen']));
+        if (request()->ajax()) {
+            $dosen = Dosen::with(['mahasiswa','dosen'])->where('id', Auth::user()->dosen_id)->first();
+            $mahasiswa = $dosen->mahasiswa;
+            return Datatables::of($mahasiswa)
+                ->make();
+        }
+
+        return view('pages.dosen.mahasiswa.index');
     }
 
     /**
@@ -66,5 +74,16 @@ class MahasiswaDosenController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    public function cetak(){
+        
+        $dosen = Dosen::with(['mahasiswa','dosen'])->where('id', Auth::user()->dosen_id)->first();
+        $mahasiswa = $dosen->mahasiswa;
+
+	    return view('pages.dosen.mahasiswa.cetak', compact([
+            'mahasiswa',
+            'dosen',
+        ]));
     }
 }

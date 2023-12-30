@@ -16,7 +16,7 @@ class MatkulController extends Controller
     public function index()
     {
         if (request()->ajax()) {
-            $query = Matakuliah::query();
+            $query = Matakuliah::query()->get();
 
             return Datatables::of($query)
                 ->addColumn('action', function ($item) {
@@ -120,5 +120,13 @@ class MatkulController extends Controller
         Alert::success('Data Berhasil dihapus!');
 
         return redirect()->route('matakuliah.index');
+    }
+
+    public function cetak(){
+        $matakuliah = Matakuliah::all();
+
+	    return view('pages.admin.matakuliah.cetak', compact([
+            'matakuliah',
+        ]));
     }
 }

@@ -20,19 +20,12 @@
 			<li>
 				<i class='bx bxs-group' ></i>
 				<span class="text">
-					<h3>2834</h3>
-					<p>Visitors</p>
-				</span>
-			</li>
-			<li>
-				<i class='bx bxs-dollar-circle' ></i>
-				<span class="text">
-					<h3>$2543</h3>
-					<p>Total Sales</p>
+					<h3>Dosen</h3>
+					<h4>{{ $dosen }}</h4>
 				</span>
 			</li>
 		</ul>
-
+		
 		<div class="table-data">
 			<div class="order">
 				<div class="head">
@@ -44,9 +37,12 @@
 				<div class="row m-1">
 					<p>NIM : {{ $nim_mahasiswa }}</p>
 				</div>
+				<div class="row m-1">
 					<p>Email : {{ Auth::user()->email }}</p>
+				</div>
 			</div>
 		</div>
 	</main>
 	<!-- MAIN -->
 @endsection
+

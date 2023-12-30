@@ -14,7 +14,7 @@ class MahasiswaDosen extends Model
     protected $fillable = [
         'mahasiswa_id',
         'dosen_id',
-        'matkul_id',
+        'matakuliah_id',
     ];
 
     public function dosen(){

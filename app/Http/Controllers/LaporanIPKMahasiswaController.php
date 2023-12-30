@@ -2,14 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Nilai;
 use App\Models\Mahasiswa;
-use App\Models\Matakuliah;
 use Illuminate\Http\Request;
-use App\Models\MahasiswaDosen;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-use Yajra\DataTables\Facades\DataTables;
 
-class MatkulMahasiswaController extends Controller
+class LaporanIPKMahasiswaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,16 +19,26 @@ class MatkulMahasiswaController extends Controller
 
         $mahasiswaId = auth()->user()->mahasiswa_id;
 
-        if (request()->ajax()) {
-            $query = MahasiswaDosen::with('mahasiswa', 'dosen', 'matakuliah')
+        $nilai = Nilai::with(['dosen', 'matakuliah_nilai'])
                 ->where('mahasiswa_id', $mahasiswaId)
                 ->get();
 
-            return Datatables::of($query)->make();
-        }
+        $DataNilai = DB::table('nilai')
+            ->join('matakuliah', 'nilai.kode_matkul', '=', 'matakuliah.kode_matkul')
+            ->where('nilai.mahasiswa_id', $mahasiswaId)
+            ->select('nilai.nilai_akhir', 'matakuliah.name_matkul')
+            ->get();
         
-        return view('pages.mahasiswa.matakuliah.index', compact([
-            'nim_mahasiswa',
+        
+
+        $queryNilai = $DataNilai->mapWithKeys(function ($item){
+                return [$item->name_matkul => $item->nilai_akhir];
+            });
+
+        return view('pages.mahasiswa.laporan.index', compact([
+            'nim_mahasiswa', 
+            'nilai',
+            'queryNilai',
         ]));
     }
 
@@ -84,12 +93,12 @@ class MatkulMahasiswaController extends Controller
     public function cetak(){
         $mahasiswaId = auth()->user()->mahasiswa_id;
 
-        $matakuliah = MahasiswaDosen::with('mahasiswa', 'dosen', 'matakuliah')
+        $nilai = Nilai::with(['dosen', 'matakuliah_nilai'])
                 ->where('mahasiswa_id', $mahasiswaId)
                 ->get();
 
-	    return view('pages.mahasiswa.matakuliah.cetak', compact([
-            'matakuliah',
+	    return view('pages.mahasiswa.laporan.cetak', compact([
+            'nilai',
         ]));
     }
 }

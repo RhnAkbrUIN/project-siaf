@@ -5,8 +5,7 @@
 <main>
 	<div class="head-title">
 		<div class="left">
-			<h1>Dashboard Dosen - Mahasiswa</h1>
-			<h5>Dosen : {{ Auth::user()->name }}</h5>
+			<h1>Dashboard Admin - Mahasiswa</h1>
 		</div>
 	</div>
 
@@ -14,6 +13,10 @@
 		<div class="col-md-12 mt-2">
 			<div class="card">
 				<div class="card-body mt-2">
+					<a href="{{ route('dosen-mahasiswa-cetak') }}" target="_blank" class="btn btn-warning mb-3 ml-2">
+						<i class='bx bxs-printer' ></i>
+						Cetak 
+					</a>
 					<div class="table-responsive mt-2">
 						<table class="table table-hover scroll-horizontal-vertical w-100" id="crudTable">
 							<thead>
@@ -26,18 +29,7 @@
 									<th>Angkatan</th>
 								</tr>
 							</thead>
-							<tbody>
-                                @foreach ($mahasiswa as $mhs)
-                                    <tr>
-                                        <td>{{ $mhs->nim }}</td>
-                                        <td>{{ $mhs->name_mhs }}</td>
-                                        <td>{{ $mhs->jk }}</td>
-                                        <td>{{ $mhs->kelas }}</td>
-                                        <td>{{ $mhs->semester }}</td>
-                                        <td>{{ $mhs->angkatan }}</td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
+							<tbody></tbody>
 						</table>
 					</div>
 				</div>
@@ -47,3 +39,26 @@
 </main>
 <!-- MAIN -->
 @endsection
+
+@push('addon-script')
+    <script>
+    $(document).ready(function() {
+        var datatable = $('#crudTable').DataTable({
+            processing: true,
+            serverSide: true,
+            ordering: true,
+            ajax: {
+                url: '{!! url()->current() !!}',
+            },
+            columns: [
+                { data:'nim', name:'nim' },
+                { data:'name_mhs', name:'name_mhs' },
+                { data:'jk', name:'jk' },
+                { data:'kelas', name:'kelas' },
+                { data:'semester', name:'semester' },
+                { data:'angkatan', name:'angkatan' },
+            ]
+        });
+    });
+</script>
+@endpush

@@ -23,8 +23,8 @@
 					<span class="text">Penilaian</span>
 				</a>
 			</li>
-			<li>
-				<a href="#">
+			<li class="{{ (request()->is('laporan-ipk*')) ? 'active' : '' }}">
+				<a href="{{ route('laporan-ipk.index') }}">
 					<i class='bx bxs-doughnut-chart' ></i>
 					<span class="text">Laporan IPK</span>
 				</a>

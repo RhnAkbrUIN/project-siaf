@@ -14,7 +14,10 @@
         <div class="row">
             <div class="col-md-12 mt-2">
                 <div class="card">
-                    <div class="card-body mt-2">
+                    <div class="card-body mt-2"><a href="{{ route('mahasiswa-matakuliah-cetak') }}" target="_blank" class="btn btn-warning mb-3 ml-2">
+						<i class='bx bxs-printer' ></i>
+						Cetak 
+					</a>
                         <div class="table-responsive mt-2">
                             <table class="table table-hover scroll-horizontal-vertical w-100" id="crudTable">
                                 <thead>
